@@ -44,7 +44,6 @@ void AProtoPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	// Set up "look" bindings.
 	PlayerInputComponent->BindAxis("Turn", this, &AProtoPlayer::AddControllerYawInput);
-	PlayerInputComponent->BindAxis("LookUp", this, &AProtoPlayer::AddControllerPitchInput);
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AProtoPlayer::StartJump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AProtoPlayer::StopJump);
