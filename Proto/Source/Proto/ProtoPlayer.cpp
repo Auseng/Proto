@@ -16,21 +16,22 @@ AProtoPlayer::AProtoPlayer()
 // Called when the game starts or when spawned
 void AProtoPlayer::BeginPlay()
 {
-	Super::BeginPlay();
+Super::BeginPlay();
+
 
 	if (GEngine)
 	{
 		// Put up a debug message for five seconds. The -1 "Key" value (first argument) indicates that we will never need to update or refresh this message.
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("We are using ProtoPlayer."));
-	}
 	
+	
+}
 }
 
 // Called every frame
 void AProtoPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -42,11 +43,7 @@ void AProtoPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("MoveForward", this, &AProtoPlayer::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AProtoPlayer::MoveRight);
 
-	// Set up "look" bindings.
 	PlayerInputComponent->BindAxis("Turn", this, &AProtoPlayer::AddControllerYawInput);
-
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AProtoPlayer::StartJump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AProtoPlayer::StopJump);
 
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AProtoPlayer::Fire);
 	}
@@ -60,19 +57,11 @@ void AProtoPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	void AProtoPlayer::MoveRight(float Value)
 	{
+		const FRotator YawRotation(0.f, 0.f, 0.f);
+
 		// Find out which way is "right" and record that the player wants to move that way.
-		FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::Y);
+		FVector Direction = FRotationMatrix(YawRotation).GetScaledAxis(EAxis::Y); //FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::Y);
 		AddMovementInput(Direction, Value);
-	}
-
-	void AProtoPlayer::StartJump()
-	{
-		bPressedJump = true;
-	}
-
-	void AProtoPlayer::StopJump()
-	{
-		bPressedJump = false;
 	}
 
 	void AProtoPlayer::Fire()
@@ -89,7 +78,7 @@ void AProtoPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 			FVector MuzzleLocation = CameraLocation + FTransform(CameraRotation).TransformVector(MuzzleOffset);
 			FRotator MuzzleRotation = CameraRotation;
 			// Skew the aim to be slightly upwards.
-			MuzzleRotation.Pitch += 10.0f;
+			MuzzleRotation.Pitch += 0.0f;
 			UWorld* World = GetWorld();
 			if (World)
 			{
