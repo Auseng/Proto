@@ -15,7 +15,7 @@ ABullet::ABullet()
 	CollisionComponent->BodyInstance.SetCollisionProfileName(TEXT("Bullet"));
 	CollisionComponent->OnComponentHit.AddDynamic(this, &ABullet::OnHit);
 	// Set the sphere's collision radius.
-	CollisionComponent->InitSphereRadius(15.0f);
+	CollisionComponent->InitSphereRadius(20.0f);
 	// Set the root component to be the collision component.
 	RootComponent = CollisionComponent;
 

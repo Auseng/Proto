@@ -70,13 +70,13 @@ void AProtoPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 		if (ProjectileClass)
 		{
 			// Get the camera transform.
-			FVector CameraLocation;
-			FRotator CameraRotation;
-			GetActorEyesViewPoint(CameraLocation, CameraRotation);
+			FVector MouseLocation;
+			FRotator MouseRotation;
+			GetActorEyesViewPoint(MouseLocation, MouseRotation);
 
 			// Transform MuzzleOffset from camera space to world space.
-			FVector MuzzleLocation = CameraLocation + FTransform(CameraRotation).TransformVector(MuzzleOffset);
-			FRotator MuzzleRotation = CameraRotation;
+			FVector MuzzleLocation = MouseLocation + FTransform(MouseRotation).TransformVector(MuzzleOffset);
+			FRotator MuzzleRotation = MouseRotation;
 			// Skew the aim to be slightly upwards.
 			MuzzleRotation.Pitch += 0.0f;
 			UWorld* World = GetWorld();
